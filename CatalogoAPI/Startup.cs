@@ -22,11 +22,16 @@ namespace CatalogoAPI
         public void ConfigureServices(IServiceCollection services)
         {
 
-            string con = Configuration.GetConnectionString("DefaultConnection");
+            string conn = Configuration.GetConnectionString("DefaultConnection");
 
-            services.AddDbContext<AppDbContext>(opt => opt.UseMySql(con, ServerVersion.AutoDetect("con")));
+            services.AddDbContext<AppDbContext>(opt => opt.UseSqlServer(conn));
 
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt => 
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+  
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CatalogoAPI", Version = "v1" });

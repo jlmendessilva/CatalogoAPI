@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace CatalogoAPI.Controllers
+namespace CatalogoAPI.Models
 {
     public class Produto
     {
